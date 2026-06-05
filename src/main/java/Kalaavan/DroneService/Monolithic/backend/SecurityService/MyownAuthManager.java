@@ -10,13 +10,14 @@ import org.springframework.stereotype.Component;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 @Component
 public class MyownAuthManager implements AuthenticationManager {
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken;
-        if(authentication.getPrincipal()=="adminmail@gmail.com"){
+        if(Objects.equals(authentication.getPrincipal(), "email=adminmail%40gmail.com")){
             usernamePasswordAuthenticationToken=new UsernamePasswordAuthenticationToken(
                     authentication.getPrincipal(),authentication.getCredentials(),
                     List.of(new SimpleGrantedAuthority("Admin"),new SimpleGrantedAuthority("User")) //will figure it out later
@@ -29,7 +30,7 @@ public class MyownAuthManager implements AuthenticationManager {
             );
         }
 
-        usernamePasswordAuthenticationToken.setAuthenticated(true);
+//        usernamePasswordAuthenticationToken.setAuthenticated(true);
 
         return usernamePasswordAuthenticationToken;
 

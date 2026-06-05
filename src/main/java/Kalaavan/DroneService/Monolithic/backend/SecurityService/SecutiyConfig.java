@@ -4,8 +4,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.filter.CompositeFilter;
+import org.springframework.web.filter.CorsFilter;
 
-import java.net.http.HttpRequest;
+
 
 @Configuration
 public class SecutiyConfig {
@@ -15,10 +17,17 @@ public class SecutiyConfig {
 
         return httpReqWillPassBySecurityFilterChain.authorizeHttpRequests(
                 authorizeHttp->{
-                    authorizeHttp.anyRequest().permitAll();
+//                    authorizeHttp.anyRequest().OncePerRequestFilter.shouldNotFilter();
+//                    authorizeHttp.requestMatchers("/index.html").anonymous();
+                    authorizeHttp.requestMatchers("/ connect","/index.html","/").permitAll();
+                    authorizeHttp.requestMatchers("/admin/**").hasRole("Admin");
+                    authorizeHttp.requestMatchers("/").hasAnyRole("Admin","User");
                 }
                 )
 
+                .addFilterAfter(new AdminFilter(),
+                        CorsFilter.class
+                        )
         .build();
 
     }
