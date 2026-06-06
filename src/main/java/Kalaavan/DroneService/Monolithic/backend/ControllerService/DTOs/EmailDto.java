@@ -1,4 +1,4 @@
-package Kalaavan.DroneService.Monolithic.backend.ControllerService;
+package Kalaavan.DroneService.Monolithic.backend.ControllerService.DTOs;
 
 public class EmailDto {
     String email;
