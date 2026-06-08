@@ -2,7 +2,7 @@ package Kalaavan.DroneService.Monolithic.backend.ControllerService.DTOs;
 
 public class EmailDto {
     String email;
-
+//will add a few details on it
     public EmailDto() {
     }
 

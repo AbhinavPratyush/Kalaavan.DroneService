@@ -1,11 +1,17 @@
 package Kalaavan.DroneService.Monolithic.backend.DbCalls.entity;
 
-import org.springframework.data.mongodb.core.mapping.Document;
+import jakarta.persistence.*;
 
+@Entity
+@Table(name = "drone_service")
 public class DroneService {
 
-    private String serviceId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long serviceId;
+
     private float price;
+
     private String description;
 
 
@@ -25,11 +31,11 @@ public class DroneService {
     public DroneService() {
     }
 
-    public String getServiceId() {
+    public long getServiceId() {
         return serviceId;
     }
 
-    public void setServiceId(String serviceId) {
+    public void setServiceId(long serviceId) {
         this.serviceId = serviceId;
     }
 
