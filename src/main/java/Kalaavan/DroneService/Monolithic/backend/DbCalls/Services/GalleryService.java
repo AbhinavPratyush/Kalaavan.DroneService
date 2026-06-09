@@ -2,12 +2,15 @@ package Kalaavan.DroneService.Monolithic.backend.DbCalls.Services;
 
 import Kalaavan.DroneService.Monolithic.backend.DbCalls.entity.DroneService;
 import Kalaavan.DroneService.Monolithic.backend.DbCalls.entity.Gallery;
+import Kalaavan.DroneService.Monolithic.backend.DbCalls.entity.Projection.DroneServiceProjection;
+import Kalaavan.DroneService.Monolithic.backend.DbCalls.entity.Projection.GalleryProjection;
 import Kalaavan.DroneService.Monolithic.backend.DbCalls.entity.hide_and_show.HideShow;
 import Kalaavan.DroneService.Monolithic.backend.DbCalls.repo.GalleryImpl;
 import Kalaavan.DroneService.Monolithic.backend.DbCalls.repo.HideShowImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +25,17 @@ public class GalleryService {
     HideShowImpl hideShow;
 
     public List<Gallery> loadingGallery(){
+        List<GalleryProjection> p= hideShow.show_Gallery();
+        ArrayList<Gallery> q=new ArrayList<>();
+        for(GalleryProjection a:p){
+            Gallery b=new Gallery();
+            b.setId(a.getId());
+            b.setVideo(a.getVideo());
+            q.add(b);
+        }
+        return q;
+    }
+    public List<Gallery> loadingAllGallery(){
         return galleryImpl.findAll();
     }
 

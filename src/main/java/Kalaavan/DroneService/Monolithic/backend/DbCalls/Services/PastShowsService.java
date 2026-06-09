@@ -2,14 +2,18 @@ package Kalaavan.DroneService.Monolithic.backend.DbCalls.Services;
 
 import Kalaavan.DroneService.Monolithic.backend.DbCalls.entity.Gallery;
 import Kalaavan.DroneService.Monolithic.backend.DbCalls.entity.PastShows;
+import Kalaavan.DroneService.Monolithic.backend.DbCalls.entity.Projection.PastShowsProjection;
 import Kalaavan.DroneService.Monolithic.backend.DbCalls.entity.hide_and_show.HideShow;
 import Kalaavan.DroneService.Monolithic.backend.DbCalls.repo.HideShowImpl;
 import Kalaavan.DroneService.Monolithic.backend.DbCalls.repo.PastShowsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class PastShowsService {
     @Autowired
     PastShowsImpl pastShows;
@@ -17,7 +21,22 @@ public class PastShowsService {
     HideShowImpl hideShow;
 
 
+
     public List<PastShows> loadingPastShows(){
+        List<PastShowsProjection> p= hideShow.show_PastShows();
+        ArrayList<PastShows> q=new ArrayList<>();
+        for(PastShowsProjection a:p){
+            PastShows b=new PastShows();
+            b.setId(a.getId());
+            b.setName(a.getName());
+            b.setImage(a.getImage());
+            q.add(b);
+        }
+        return q;
+    }
+
+
+    public List<PastShows> loadingAllPastShows(){
         return pastShows.findAll();
     }
 
