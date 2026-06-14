@@ -65,4 +65,13 @@ public class PastShowsService {
         return "Hid it";
     }
 
+
+    public String showThisPastShow(PastShows pastShows){
+        HideShow show= new HideShow();
+        show.setService_name("past");
+        show.setServices_id(pastShows.getId());
+        hideShow.save(show);
+        return "pastShow is showing";
+    }
+
 }

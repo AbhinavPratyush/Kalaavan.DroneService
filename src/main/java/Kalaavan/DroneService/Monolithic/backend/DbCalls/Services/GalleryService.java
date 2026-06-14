@@ -64,5 +64,12 @@ public class GalleryService {
         return "Hid it";
     }
 
+    public String showThisService(Gallery gallery){
+        HideShow show= new HideShow();
+        show.setService_name("gallery");
+        show.setServices_id(gallery.getId());
+        hideShow.save(show);
+        return "gallery is showing";
+    }
 
 }

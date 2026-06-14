@@ -61,4 +61,12 @@ public class DroneServiceProvidedService {
         return "Hid it";
     }
 
+    public String showThisDroneService(DroneService droneService){
+        HideShow show=new HideShow();
+        show.setService_name("drone");
+        show.setServices_id(droneService.getServiceId());
+        hideShow.save(show);
+        return "CHeck if Showing or not";
+
+    }
 }

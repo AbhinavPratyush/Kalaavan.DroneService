@@ -2,7 +2,7 @@ package Kalaavan.DroneService.Monolithic.backend.ControllerService.DTOs;
 
 import Kalaavan.DroneService.Monolithic.backend.DbCalls.entity.DroneService;
 import org.springframework.web.multipart.MultipartFile;
-
+@Deprecated
 public class DronServiceMmsDto  {
     MultipartFile  file;
     private float price;

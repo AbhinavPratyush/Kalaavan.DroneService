@@ -10,30 +10,42 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.io.IOException;
+
 @Controller
 public class AdminController {
     //there are three adding service required
     @Autowired
     HandlingAdminServices handlingAdminServices;
 
-    @PostMapping("/admin/add/PastShows")
-    public String jhbvcbhs(@RequestBody PastShowsDto pastShowsDto){
-        handlingAdminServices.addToDb(pastShowsDto);
-        return "successful";
-    }
-
-    @PostMapping("/admin/add/Gallery")
-    public String jsd(@RequestBody GalleryDto gallery){
-        handlingAdminServices.addToDb(gallery);
-        return "successful";
-    }
 
     @PostMapping("/admin/add/DroneService")
     public String jhbbvds(@RequestBody DroneServiceDto droneServiceDto){
         handlingAdminServices.addToDb(droneServiceDto);
         return "successful";
     }
+
+
+    //-----------------------------------------------------------------------------------
     // there are three removal service required
+    @PostMapping("/admin/delete/PastShows")
+    public String khbjgn(@RequestBody PastShowsDto pastShowsDto) throws IOException, InterruptedException {
+        handlingAdminServices.remove(pastShowsDto);
+        return "successful";
+    }
+
+    @PostMapping("/admin/delete/Gallery")
+    public String jasjav(@RequestBody GalleryDto gallery) throws IOException, InterruptedException {
+        handlingAdminServices.remove(gallery);
+        return "successful";
+    }
+
+    @PostMapping("/admin/delete/DroneService")
+    public String nhfg(@RequestBody DroneServiceDto droneServiceDto){
+        handlingAdminServices.remove(droneServiceDto);
+        return "successful";
+    }
+    //-----------------------------------------------------------------------------------
     // there are three hiding service required
     @PostMapping("/admin/hide/PastShows")
     public String jhbdsfvcbhs(@RequestBody PastShowsDto pastShowsDto){
@@ -52,6 +64,24 @@ public class AdminController {
         handlingAdminServices.hide(droneServiceDto);
         return "successful";
     }
-    // there are three showing service required
 
+    //-----------------------------------------------------------------------------------
+    // there are three showing service required
+    @PostMapping("/admin/show/PastShows")
+    public String bfvd(@RequestBody PastShowsDto pastShowsDto){
+        handlingAdminServices.show(pastShowsDto);
+        return "successful";
+    }
+
+    @PostMapping("/admin/show/Gallery")
+    public String sihdh(@RequestBody GalleryDto gallery){
+        handlingAdminServices.show(gallery);
+        return "successful";
+    }
+
+    @PostMapping("/admin/show/DroneService")
+    public String bvcasbc(@RequestBody DroneServiceDto droneServiceDto){
+        handlingAdminServices.show(droneServiceDto);
+        return "successful";
+    }
 }

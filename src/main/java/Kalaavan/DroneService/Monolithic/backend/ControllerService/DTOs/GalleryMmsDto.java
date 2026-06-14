@@ -2,6 +2,7 @@ package Kalaavan.DroneService.Monolithic.backend.ControllerService.DTOs;
 
 import org.springframework.web.multipart.MultipartFile;
 
+@Deprecated
 public class GalleryMmsDto {
     MultipartFile file;
 
