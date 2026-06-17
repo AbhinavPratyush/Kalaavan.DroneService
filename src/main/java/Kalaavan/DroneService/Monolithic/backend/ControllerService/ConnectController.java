@@ -5,8 +5,10 @@ import Kalaavan.DroneService.Monolithic.backend.ControllerService.DTOs.EmailDto;
 import Kalaavan.DroneService.Monolithic.backend.ControllerService.DTOs.GalleryDto;
 import Kalaavan.DroneService.Monolithic.backend.ControllerService.DTOs.PastShowsDto;
 import Kalaavan.DroneService.Monolithic.backend.ControllerService.Services.HandlingService;
+import Kalaavan.DroneService.Monolithic.backend.DbCalls.entity.ContactDetails;
 import Kalaavan.DroneService.Monolithic.backend.DbCalls.entity.Gallery;
 import Kalaavan.DroneService.Monolithic.backend.DbCalls.entity.PastShows;
+import Kalaavan.DroneService.Monolithic.backend.DbCalls.repo.ContactDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,10 +21,17 @@ public class ConnectController {
     @Autowired
     HandlingService handlingService;
 
+    @Autowired
+    ContactDetailsImpl cdi;
+
     @PostMapping("/connect")
     public String cvc(@RequestBody EmailDto email){
-    System.out.println(email+"ldknmfnmdflngldfnglndlgndlfgnkdfgnldg");
-        return "Succesfull";
+        ContactDetails cd=new ContactDetails();
+        cd.setEmail(email.getEmail());
+        cd.setDecription(email.getDecription());
+        cd.setName(email.getName());
+        cdi.save(cd);
+        return "successfull";
     }
 
     @PostMapping("/PastShows")

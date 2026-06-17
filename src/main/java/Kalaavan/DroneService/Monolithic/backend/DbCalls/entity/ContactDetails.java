@@ -21,6 +21,9 @@ public class ContactDetails {
 
     String decription;
 
+    public ContactDetails() {
+    }
+
     public ContactDetails(long id, String email, String name, String decription) {
         this.id = id;
         this.email = email;
