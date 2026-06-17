@@ -36,7 +36,7 @@ public class AdminAddPastShows {
     }
     else{
     ArrayList<PastShows> a= (ArrayList<PastShows>) pastShowsDto.getItself();
-    for(PastShows i:a){i.setName(resp);
+    for(PastShows i:a){i.setImage(resp);
     }
     pastShowsDto.setItself(a);
 

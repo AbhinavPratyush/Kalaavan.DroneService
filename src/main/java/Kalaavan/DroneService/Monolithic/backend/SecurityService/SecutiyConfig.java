@@ -1,8 +1,15 @@
 package Kalaavan.DroneService.Monolithic.backend.SecurityService;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.filter.CompositeFilter;
 import org.springframework.web.filter.CorsFilter;
@@ -12,6 +19,25 @@ import org.springframework.web.filter.CorsFilter;
 @Configuration
 public class SecutiyConfig {
 
+    @Value("{$admin.username}")
+    String adminIs;
+
+    @Value("{$admin.password}")
+    String how;
+
+    @Bean
+    UserDetailsService userDetailsService(){
+
+        UserDetails admin= User.builder()
+                .username(adminIs)
+                .password(how)
+                .roles("ADMIN")
+                .build();
+
+        return new InMemoryUserDetailsManager(admin);
+    }
+
+
     @Bean
     public SecurityFilterChain SomeNameForFunc(HttpSecurity httpReqWillPassBySecurityFilterChain) throws Exception{
 
@@ -19,15 +45,11 @@ public class SecutiyConfig {
                 authorizeHttp->{
 //                    authorizeHttp.anyRequest().OncePerRequestFilter.shouldNotFilter();
 //                    authorizeHttp.requestMatchers("/index.html").anonymous();
-                    authorizeHttp.requestMatchers("/ connect","/index.html","/").permitAll();
+                    authorizeHttp.requestMatchers("/user/**").permitAll();
                     authorizeHttp.requestMatchers("/admin/**").hasRole("Admin");
-                    authorizeHttp.requestMatchers("/").hasAnyRole("Admin","User");
                 }
                 )
-
-                .addFilterAfter(new AdminFilter(),
-                        CorsFilter.class
-                        )
+                .formLogin(Customizer.withDefaults())
         .build();
 
     }
